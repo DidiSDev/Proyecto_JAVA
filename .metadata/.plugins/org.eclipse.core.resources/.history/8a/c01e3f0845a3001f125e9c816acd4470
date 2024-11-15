@@ -1,0 +1,53 @@
+import java.awt.FlowLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
+
+public class ventanaCita extends JFrame{
+	private JLabel [] l;
+	private JTextField [] t;
+	private JComboBox <String> cb;
+	//private JCalendar calendar; // investigar los dos para implementarlos
+	//private JPopupMenu popMenu;
+	private JButton b;
+	
+	ventanaCita(){
+		super();
+		this.setBounds(500, 250, 250, 250);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.getContentPane().setLayout(new FlowLayout(FlowLayout.LEFT));
+		//TitledBorder border = BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), "Cita", TitledBorder.LEFT, TitledBorder.TOP);
+		
+		
+		String [] servicios = {"Cambio Aceite", "Cambio Neumaticos", "Chapa y Pintura"};
+		String [] labels = {"Nombre y Apellido", "Correo", "Servicio", "Fecha"};
+		
+		l = new JLabel[labels.length];
+		t = new JTextField[2];
+		cb = new JComboBox(servicios);
+		b = new JButton("Reservar Cita");
+		
+		for(int x = 0; x < l.length; x++) {
+			l[x] = new JLabel(labels[x]);
+			this.getContentPane().add(l[x]);
+			if(x < 2) {
+				t[x] = new JTextField();
+				this.getContentPane().add(l[x]);
+			}else if( x == 2) {
+				this.getContentPane().add(cb);
+			} else {
+				this.getContentPane().add(b);
+			}
+		}
+		
+		this.setVisible(true);
+		this.setResizable(false);
+	}
+}
