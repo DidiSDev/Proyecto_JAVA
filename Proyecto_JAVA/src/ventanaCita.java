@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+import com.toedter.calendar.JCalendar;
+
 import java.awt.*;
 
 public class ventanaCita extends JFrame {
@@ -7,6 +10,7 @@ public class ventanaCita extends JFrame {
     private JTextField[] t;
     private JComboBox[] cb;
     private JButton b;
+    private JCalendar ca;
 
     public ventanaCita() {
         super("Registrar Cita");
@@ -37,7 +41,7 @@ public class ventanaCita extends JFrame {
         cb[1].setPreferredSize(new Dimension(230, 25));
         cb[1].setSelectedIndex(-1);
         b = new JButton("Reservar");
-
+ 
  
         for (int x = 0; x < l.length; x++) {
             l[x] = new JLabel(labels[x]);
@@ -54,7 +58,9 @@ public class ventanaCita extends JFrame {
             }
         }
 
-    
+        ca = new JCalendar();
+        ca.setPreferredSize(new Dimension(200,100));
+        this.getContentPane().add(ca);
         
         this.getContentPane().add(b);
 
