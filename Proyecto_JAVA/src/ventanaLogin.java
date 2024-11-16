@@ -23,7 +23,7 @@ public class ventanaLogin extends JFrame{
 		this.operaciones=operaciones;
 		this.setLayout(new FlowLayout(FlowLayout.CENTER)); //TODO CENTRADO
 		this.setResizable(false);
-		this.setSize(450,400);
+		this.setSize(450,300);
 		this.setLocation(600,200);
 		this.setTitle("Login");
 		
@@ -74,7 +74,7 @@ public class ventanaLogin extends JFrame{
 	}
 	public void crearAñadirTitulo()
 	{
-		titulo=new JLabel("NOMBRE EN ROJO Y NEGRITA");
+		titulo=new JLabel("LOGIN DE ADMINISTRADORES");
 		titulo.setPreferredSize(new Dimension(360,100)); //AJUSTAR TAMAÑO EN FUNCION DE LO QUE ESCRIBAMOS
 		titulo.setFont(new Font("Arial", Font.BOLD, 24)); 
 		titulo.setForeground(Color.red);

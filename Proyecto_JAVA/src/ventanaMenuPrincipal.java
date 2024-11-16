@@ -8,12 +8,12 @@ public class ventanaMenuPrincipal extends JInternalFrame {
 	private JMenu menu, alta, baja, modificar,salir;
 	private JMenuItem cliente, empleado, proveedor, vehiculo, servicio, cita, factura, nomina, maquinaria;
 	private JMenuBar menubar;
+	private BaseDatos operaciones;
 	
-	
-	ventanaMenuPrincipal()
+	ventanaMenuPrincipal(BaseDatos operaciones)
 	{
 		this.setLayout(new FlowLayout());
-		
+		this.operaciones=operaciones;
 		MenuAltaBajaModificacion();
 		MenuClienteEmpleadoProveedor();
 		
