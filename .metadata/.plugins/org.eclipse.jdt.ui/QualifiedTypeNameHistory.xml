@@ -2,4 +2,6 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="java.awt.Dimension"/>
     <fullyQualifiedTypeName name="java.awt.Font"/>
+    <fullyQualifiedTypeName name="com.jcalendar.model.JCalModel"/>
+    <fullyQualifiedTypeName name="com.toedter.calendar.JCalendar"/>
 </qualifiedTypeNameHistroy>
