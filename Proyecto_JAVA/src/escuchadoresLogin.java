@@ -27,32 +27,40 @@ public class escuchadoresLogin implements ActionListener
 				return;
 			}
 			String query="SELECT * from admin";
-			ResultSet rs=operaciones.query(query);
-			if (rs.next())
-			{
-				nombreAdmin=rs.getString(2);
-				passAdmin=rs.getString(3);
-				if (v.getNombreCaja().getText().equalsIgnoreCase(nombreAdmin)
-					&& v.getContraseñaCaja().getText().equals(passAdmin))
+			ResultSet rs;
+			try {
+				rs = operaciones.query(query);
+				
+				if (rs.next())
 				{
-					System.out.println("Entra");
-					JOptionPane.showMessageDialog(v, "Datos correctos, conectando...");
-					//TRAS ESTO NOS VAMOS AL MENU PPAL
-					ventanaMenuPrincipal ventanaMenuPrincipal=new ventanaMenuPrincipal(operaciones); //NOS LLEVAMOS LA CONEXION
-					ventanaMenuPrincipal.setVisible(true);
-					//LIMPIAMOS LA VENTANA PRINCIPAL Y DAMOS MÁS TAMAÑO PARA LAS DEMÁS VENTANAS
-					v.setSize(750,750);
-					v.getContentPane().removeAll();
-					v.getContentPane().add(ventanaMenuPrincipal);
-					v.revalidate();
-					v.repaint();
+					nombreAdmin=rs.getString(2);
+					passAdmin=rs.getString(3);
+					if (v.getNombreCaja().getText().equalsIgnoreCase(nombreAdmin)
+						&& v.getContraseñaCaja().getText().equals(passAdmin))
+					{
+						System.out.println("Entra");
+						JOptionPane.showMessageDialog(v, "Datos correctos, conectando...");
+						//TRAS ESTO NOS VAMOS AL MENU PPAL
+						ventanaMenuPrincipal ventanaMenuPrincipal=new ventanaMenuPrincipal(operaciones); //NOS LLEVAMOS LA CONEXION
+						ventanaMenuPrincipal.setVisible(true);
+						//LIMPIAMOS LA VENTANA PRINCIPAL Y DAMOS MÁS TAMAÑO PARA LAS DEMÁS VENTANAS
+						v.setSize(750,750);
+						v.getContentPane().removeAll();
+						v.getContentPane().add(ventanaMenuPrincipal);
+						v.revalidate();
+						v.repaint();
+					}
+						
 				}
-					
+				else
+				{
+					JOptionPane.showMessageDialog(v, "Error al obtener los datos del admin");
+				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
-			else
-			{
-				JOptionPane.showMessageDialog(v, "Error al obtener los datos del admin");
-			}
+			
 		}
 		else if (e.getSource()==v.getRegistrar())
 		{
@@ -61,12 +69,20 @@ public class escuchadoresLogin implements ActionListener
 			//AÑADIR EL ASUNTILLO ESE DE REGISTRAR Y MODIFICAR LA VENTANA PRINCIPAL CON NUEVOS ELEMENTOS
 			//NOMBRE, CONTRASEÑA, REPETIR CONTRASEÑA....
 			
+			ventanaRegistro ventanaRegistro=new ventanaRegistro(operaciones, v);
+			ventanaRegistro.setVisible(true);
 			
-			
-			
-			
-			
-			
+			/**
+			 * 
+			 * 
+			 * 
+			 * ¡¡¡¡¡¡¡¡¡¡¡IMPORTANTE, v ES ventanaLogin!!!!!!!!!!!!!
+			 * */ 
+			v.setSize(500,385);
+			v.getContentPane().removeAll();
+			v.getContentPane().add(ventanaRegistro);
+			v.revalidate();
+			v.repaint();		
 			
 		}
 
