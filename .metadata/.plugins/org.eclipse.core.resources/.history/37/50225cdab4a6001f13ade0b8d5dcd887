@@ -1,0 +1,123 @@
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+public class AltaProveedor extends JInternalFrame {
+
+	private BaseDatos operaciones;
+	private ventanaMenuPrincipal v;
+	private JLabel nombreLabel, direccionLabel, telefonoLabel, emailLabel;
+	private JTextField nombreCaja, direccionCaja, telefonoCaja, emailCaja;
+	private TitledBorder tit1;
+	private JPanel panel1;
+	private JButton btnRegistro,btnLimpiar,btnSalir;
+
+	AltaProveedor(ventanaMenuPrincipal v2, BaseDatos operaciones2)
+	{
+		
+		super();
+	        
+	    this.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+	    this.setBackground(Color.LIGHT_GRAY.darker());
+		this.v=v2;
+		this.operaciones=operaciones2;
+		
+		panel1=new JPanel();
+		v2.setSize(540, 300);
+		panel1.setPreferredSize(new Dimension(500, 200));
+		nombreLabel=new JLabel("NOMBRE:");
+		direccionLabel=new JLabel("DIRECCIÓN:");
+		telefonoLabel=new JLabel("TELÉFONO:");
+		emailLabel=new JLabel("EMAIL:");
+		
+		nombreLabel.setFont(new Font("Arial", Font.BOLD, 13));
+		direccionLabel.setFont(new Font("Arial", Font.BOLD, 13));
+		telefonoLabel.setFont(new Font("Arial", Font.BOLD, 13));
+		emailLabel.setFont(new Font("Arial", Font.BOLD, 13));
+		
+		nombreLabel.setPreferredSize(new Dimension(120, 25));
+
+		direccionLabel.setPreferredSize(new Dimension(120, 25));
+		telefonoLabel.setPreferredSize(new Dimension(120, 25));
+		emailLabel.setPreferredSize(new Dimension(120, 25));
+
+		
+		nombreCaja=new JTextField("");
+		nombreCaja.setPreferredSize(new Dimension(300, 25));
+		direccionCaja=new JTextField("");
+		direccionCaja.setPreferredSize(new Dimension(300, 25));
+
+		telefonoCaja=new JTextField("");
+		telefonoCaja.setPreferredSize(new Dimension(300, 25));
+
+		emailCaja=new JTextField("");
+		emailCaja.setPreferredSize(new Dimension(300, 25));
+
+		panel1.add(nombreLabel);
+		panel1.add(nombreCaja);
+		panel1.add(direccionLabel);
+		panel1.add(direccionCaja);
+		panel1.add(telefonoLabel);
+		panel1.add(telefonoCaja);
+		panel1.add(emailLabel);
+		panel1.add(emailCaja);
+		
+		tit1=new TitledBorder("Datos del proveedor");
+		tit1.setTitleColor(Color.red);
+		panel1.setBorder(tit1);
+		this.add(panel1);
+		
+		instanciarBotones();
+	}
+	public void instanciarBotones()
+	{
+		this.setBackground(Color.LIGHT_GRAY.darker());
+		btnRegistro = new JButton("REGISTRARSE");
+		btnLimpiar = new JButton("LIMPIAR");
+		btnSalir = new JButton("SALIR");
+		
+//		btnRegistro.addActionListener(new BotonesAlta(v));
+//		btnLimpiar.addActionListener(new BotonesAlta(v));
+//		btnSalir.addActionListener(new BotonesAlta(v));
+
+		btnRegistro.setBackground(Color.black);
+		btnLimpiar.setBackground(Color.black);
+		btnSalir.setBackground(Color.black);
+		
+		btnRegistro.setForeground(Color.white);
+		btnLimpiar.setForeground(Color.white);
+		btnSalir.setForeground(Color.white);
+
+		this.add(btnRegistro);
+		this.add(btnLimpiar);
+		this.add(btnSalir);
+	}
+	
+	public void validar() 
+	{
+		if(nombreCaja.equals("")) {
+			JOptionPane.showMessageDialog(this, "COMPLETE TODOS LOS CAMPOS PORFAVOR");
+		}
+		if(direccionCaja.equals("")) {
+			JOptionPane.showMessageDialog(this, "COMPLETE TODOS LOS CAMPOS PORFAVOR");
+		}
+		if(telefonoCaja.equals("")) {
+			JOptionPane.showMessageDialog(this, "COMPLETE TODOS LOS CAMPOS PORFAVOR");
+		}
+		if(emailCaja.equals("")) {
+			JOptionPane.showMessageDialog(this, "COMPLETE TODOS LOS CAMPOS PORFAVOR");
+		}
+	
+	}
+	
+	public void limpiarCajas() 
+	{
+		nombreCaja.setText("");
+		direccionCaja.setText("");
+		telefonoCaja.setText("");
+		emailCaja.setText("");
+	}
+}

@@ -63,7 +63,7 @@ public class escuchadoresRegistro implements ActionListener {
 				}
 				
 				String query="INSERT INTO admin VALUES("+id_admin+", '"+vRegistro.getUsuarioCaja().getText()+"', '"+vRegistro.getContraseñaCaja().getText()+"')";
-				try {
+				try {	
 					//EJECUTO OPERACION CON AL QUERY
 					operaciones.update(query);
 				} catch (SQLException e1) {
@@ -72,6 +72,7 @@ public class escuchadoresRegistro implements ActionListener {
 				}
 				limpiamos();
 				JOptionPane.showMessageDialog(vLogin, "¡Te has registrado correctamente!");
+				
 			}
 							
 		}
@@ -128,6 +129,7 @@ public class escuchadoresRegistro implements ActionListener {
 		}
 		else
 		{
+			id_admin=1;
 			JOptionPane.showMessageDialog(vLogin, "¡¡Error al consultar la base de datos!!");
 		}
 	}

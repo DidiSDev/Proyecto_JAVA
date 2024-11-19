@@ -1,0 +1,12 @@
+import javax.swing.*;
+public class AltaProveedor extends JInternalFrame {
+
+	private BaseDatos operaciones;
+	private ventanaMenuPrincipal v;
+	
+	AltaProveedor(ventanaMenuPrincipal v2, BaseDatos operaciones2)
+	{
+		this.v=v2;
+		this.operaciones=operaciones2;
+	}
+}

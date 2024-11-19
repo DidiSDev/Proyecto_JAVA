@@ -44,11 +44,8 @@ public class escuchadoresLogin implements ActionListener
 						ventanaMenuPrincipal ventanaMenuPrincipal=new ventanaMenuPrincipal(operaciones); //NOS LLEVAMOS LA CONEXION
 						ventanaMenuPrincipal.setVisible(true);
 						//LIMPIAMOS LA VENTANA PRINCIPAL Y DAMOS MÁS TAMAÑO PARA LAS DEMÁS VENTANAS
-						v.setSize(750,750);
-						v.getContentPane().removeAll();
-						v.getContentPane().add(ventanaMenuPrincipal);
-						v.revalidate();
-						v.repaint();
+
+						v.dispose();
 					}
 						
 				}
