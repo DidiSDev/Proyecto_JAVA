@@ -6,10 +6,12 @@ public class EscuchadorMenu implements ActionListener {
 
 	private ventanaMenuPrincipal v;
 	private String opc;
+	private BaseDatos operaciones;
 	
-	EscuchadorMenu(ventanaMenuPrincipal vent, String frase){
+	EscuchadorMenu(ventanaMenuPrincipal vent, String frase, BaseDatos operaciones){
 		v=vent;
 		opc=frase;
+		this.operaciones=operaciones;
 	}
 	
 	@Override
@@ -29,6 +31,12 @@ public class EscuchadorMenu implements ActionListener {
 			case "ae":
 				break;
 			case "ap":
+				AltaProveedor AltaProveedor=new AltaProveedor(v, operaciones);
+				AltaProveedor.setVisible(true);
+				v.getContentPane().removeAll();
+				v.getContentPane().add(AltaProveedor);
+				v.repaint();
+				v.revalidate();
 				break;
 				//Borrar
 			case "bc":
