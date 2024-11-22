@@ -1,7 +1,13 @@
 
 public class claseServicio {
-	private int idServicio, idEmpleado;
-	private String nombre, descripcion;
+	private int idServicio;
+	private String nombre, descripcion, fecha;
+	public String getFecha() {
+		return fecha;
+	}
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
 	private double importe;
 	public int getIdServicio() {
 		return idServicio;
@@ -9,12 +15,7 @@ public class claseServicio {
 	public void setIdServicio(int idServicio) {
 		this.idServicio = idServicio;
 	}
-	public int getIdEmpleado() {
-		return idEmpleado;
-	}
-	public void setIdEmpleado(int idEmpleado) {
-		this.idEmpleado = idEmpleado;
-	}
+	
 	public String getNombre() {
 		return nombre;
 	}

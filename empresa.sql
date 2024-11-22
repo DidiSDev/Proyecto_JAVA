@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2024 a las 18:20:25
+-- Tiempo de generación: 20-11-2024 a las 11:48:57
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -20,8 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `empresa`
 --
-CREATE DATABASE IF NOT EXISTS empresa;
-USE empresa;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `admin`
+--
+
+CREATE TABLE `admin` (
+  `id_admin` int(15) NOT NULL,
+  `nombre_admin` varchar(25) NOT NULL,
+  `pass_admin` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `nombre_admin`, `pass_admin`) VALUES
+(1, 'Diego', 'Jodermacho'),
+(2, 'Probando1', 'averSiva');
+
 -- --------------------------------------------------------
 
 --
@@ -105,7 +124,7 @@ CREATE TABLE `facturas` (
 CREATE TABLE `maquinarias` (
   `maquinaria_id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `proveedor_id` int(11) DEFAULT NULL,
+  `proveedor_email` varchar(50) DEFAULT NULL,
   `fecha_adquisicion` date DEFAULT NULL,
   `estado` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -131,12 +150,19 @@ CREATE TABLE `nominas` (
 --
 
 CREATE TABLE `proveedores` (
-  `proveedor_id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `direccion` varchar(200) DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL
+  `email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `proveedores`
+--
+
+INSERT INTO `proveedores` (`nombre`, `direccion`, `telefono`, `email`) VALUES
+('Diego', 'u', '5555555', 'aa@aa.aa'),
+('qwe', 'qweqw', '223132', 'aaa@aa.aa');
 
 -- --------------------------------------------------------
 
@@ -171,6 +197,12 @@ CREATE TABLE `vehiculos` (
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id_admin`);
 
 --
 -- Indices de la tabla `citas`
@@ -215,7 +247,7 @@ ALTER TABLE `facturas`
 --
 ALTER TABLE `maquinarias`
   ADD PRIMARY KEY (`maquinaria_id`),
-  ADD KEY `proveedor_id` (`proveedor_id`);
+  ADD KEY `fk` (`proveedor_email`);
 
 --
 -- Indices de la tabla `nominas`
@@ -228,8 +260,7 @@ ALTER TABLE `nominas`
 -- Indices de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  ADD PRIMARY KEY (`proveedor_id`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`email`);
 
 --
 -- Indices de la tabla `servicios`
@@ -292,12 +323,6 @@ ALTER TABLE `nominas`
   MODIFY `nomina_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `proveedores`
---
-ALTER TABLE `proveedores`
-  MODIFY `proveedor_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
@@ -332,7 +357,7 @@ ALTER TABLE `facturas`
 -- Filtros para la tabla `maquinarias`
 --
 ALTER TABLE `maquinarias`
-  ADD CONSTRAINT `maquinarias_ibfk_1` FOREIGN KEY (`proveedor_id`) REFERENCES `proveedores` (`proveedor_id`);
+  ADD CONSTRAINT `fk` FOREIGN KEY (`proveedor_email`) REFERENCES `proveedores` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `nominas`

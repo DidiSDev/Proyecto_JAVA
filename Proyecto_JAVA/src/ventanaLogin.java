@@ -63,9 +63,9 @@ public class ventanaLogin extends JFrame{
 		contraseñaLabel=new JLabel("Contraseña:"); //VALIDAR
 		contraseñaLabel.setPreferredSize(new Dimension(140,30));
 		nombreCaja=new JTextField("");
-		nombreCaja.setPreferredSize(new Dimension(140,30));
+		nombreCaja.setPreferredSize(new Dimension(180,30));
 		contraseñaCaja=new JPasswordField("");
-		contraseñaCaja.setPreferredSize(new Dimension(140,30));
+		contraseñaCaja.setPreferredSize(new Dimension(180,30));
 		
 		this.add(nombreLabel);
 		this.add(nombreCaja);

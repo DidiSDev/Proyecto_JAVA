@@ -26,40 +26,30 @@ public class escuchadoresLogin implements ActionListener
 				//OBLIGAMOS A RELLENAR CAMPOS
 				return;
 			}
-			String query="SELECT * from admin";
-			ResultSet rs;
-			try {
-				rs = operaciones.query(query);
-				
-				if (rs.next())
-				{
-					nombreAdmin=rs.getString(2);
-					passAdmin=rs.getString(3);
-					if (v.getNombreCaja().getText().equalsIgnoreCase(nombreAdmin)
-						&& v.getContraseñaCaja().getText().equals(passAdmin))
-					{
-						System.out.println("Entra");
-						JOptionPane.showMessageDialog(v, "Datos correctos, conectando...");
-						//TRAS ESTO NOS VAMOS AL MENU PPAL
-						ventanaMenuPrincipal ventanaMenuPrincipal=new ventanaMenuPrincipal(operaciones); //NOS LLEVAMOS LA CONEXION
-						ventanaMenuPrincipal.setVisible(true);
-						//LIMPIAMOS LA VENTANA PRINCIPAL Y DAMOS MÁS TAMAÑO PARA LAS DEMÁS VENTANAS
-						v.setSize(750,750);
-						v.getContentPane().removeAll();
-						v.getContentPane().add(ventanaMenuPrincipal);
-						v.revalidate();
-						v.repaint();
-					}
-						
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(v, "Error al obtener los datos del admin");
-				}
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			//HE PUESTO BINARY EN LA QUERY PARA QUE SQL SEA SENSIBLE A AMYUSCULAS Y MINUSCULAS
+			//SI NO LO PONGO Y LA PASS TIENE MAYUS Y MINUS, AL PONER TODO EN MINUSCULAS ENTRAS, Y NO PUÉ SER
+			 String query = "SELECT * FROM admin WHERE nombre_admin = '" + v.getNombreCaja().getText() 
+                     + "' AND BINARY pass_admin = '" + v.getContraseñaCaja().getText() + "'";
+                     try 
+                     {
+                         ResultSet rs;
+                         rs=operaciones.query(query);
+
+                         if (rs.next()) 
+                         {
+                             JOptionPane.showMessageDialog(v, "Datos correctos, conectando...");
+                             ventanaMenuPrincipal ventanaMenuPrincipal = new ventanaMenuPrincipal(operaciones);
+                             ventanaMenuPrincipal.setVisible(true);
+                             v.dispose(); //CIERRO ESTA VENTANA
+                         } 
+                         else 
+                         {
+                             JOptionPane.showMessageDialog(v, "¡¡Error, las credenciales no son correctas!!");
+                         }
+                     } catch (SQLException e1) {
+                         JOptionPane.showMessageDialog(v, "Error al conectar con la base de datos: " + e1.getMessage());
+                         e1.printStackTrace();
+                     }
 			
 		}
 		else if (e.getSource()==v.getRegistrar())
