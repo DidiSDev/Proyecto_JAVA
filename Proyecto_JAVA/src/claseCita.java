@@ -1,9 +1,23 @@
+import java.util.Date;
 
 public class claseCita {
-	private int idCita, idCliente, idServicio;
 	private String fecha;
+	private String hora;
+	private int idCita, idCliente, idServicio;
 	
 	
+	public String getFecha() {
+		return fecha;
+	}
+	public void setFecha(String string) {
+		this.fecha = string;
+	}
+	public String getHora() {
+		return hora;
+	}
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
 	public int getIdCita() {
 		return idCita;
 	}
@@ -16,18 +30,11 @@ public class claseCita {
 	public void setIdCliente(int idCliente) {
 		this.idCliente = idCliente;
 	}
-	
 	public int getIdServicio() {
 		return idServicio;
 	}
 	public void setIdServicio(int idServicio) {
 		this.idServicio = idServicio;
-	}
-	public String getFecha() {
-		return fecha;
-	}
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
 	}
 	
 	

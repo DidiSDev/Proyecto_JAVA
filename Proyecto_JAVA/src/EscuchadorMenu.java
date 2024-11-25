@@ -1,6 +1,7 @@
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class EscuchadorMenu implements ActionListener {
 
@@ -71,6 +72,55 @@ public class EscuchadorMenu implements ActionListener {
             v.repaint();
             v.revalidate();
             break;
+        case "acita":
+        	v.getContentPane().removeAll();
+        	ventanaCita ventanaCita=new ventanaCita(operaciones, v);
+        	ventanaCita.setVisible(true);
+        	v.setSize(490,590);
+        	v.getContentPane().add(ventanaCita);
+        	v.repaint();
+        	v.revalidate();
+        	break;
+        case "av":
+        	v.getContentPane().removeAll();
+        	try {
+				altaVehiculo altaVehiculo=new altaVehiculo(operaciones, v);
+				altaVehiculo.setVisible(true);
+				 v.setSize(490, 460);
+				v.getContentPane().add(altaVehiculo);
+				v.repaint();
+				v.revalidate();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				
+			}
+        	break;
+        case "mv":
+        	v.getContentPane().removeAll();
+        	mostrarVehiculos mostrarVehiculos;
+			try {
+				mostrarVehiculos = new mostrarVehiculos(operaciones, v);
+	        	mostrarVehiculos.setVisible(true);
+	        	v.setSize(750, 450);
+	        	v.getContentPane().add(mostrarVehiculos);
+	        	v.repaint();
+	        	v.revalidate();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        	
+        	break;
+        case "bv":
+        	v.getContentPane().removeAll();
+        	buscarVehiculo buscarVehiculo=new buscarVehiculo(operaciones, v);
+        	buscarVehiculo.setVisible(true);
+        	v.setSize(450, 250);
+        	v.getContentPane().add(buscarVehiculo);
+        	v.revalidate();
+        	v.repaint();
+        	break;
     }
 		
 	}

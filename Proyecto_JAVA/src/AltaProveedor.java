@@ -228,5 +228,3 @@ public class AltaProveedor extends JInternalFrame {
 
  
 }
-
-

@@ -3,7 +3,9 @@ import java.awt.*;
 public class ventanaMenuPrincipal extends JFrame{
 	
 		private JMenu menu, alta, baja, modificar;
-		private JMenuItem anadir_cliente, anadir_empleado, anadir_proveedor, borrar_cliente, borrar_empleado, borrar_proveedor, modificar_cliente, modificar_empleado, modificar_proveedor, vehiculo, servicio, cita, factura, nomina, maquinaria, salir;
+		private JMenuItem anadir_cliente, anadir_empleado, anadir_proveedor, borrar_cliente, borrar_empleado, borrar_proveedor, 
+		modificar_cliente, modificar_empleado, pedirCita, altaVehiculo, mostrarVehiculos, buscarVehiculo,
+		modificar_proveedor, vehiculo, servicio, cita, factura, nomina, maquinaria, salir;
 		private JMenuBar menubar;
 		private BaseDatos operaciones;
 		
@@ -13,15 +15,30 @@ public class ventanaMenuPrincipal extends JFrame{
 			//this.setLayout(new FlowLayout());
 			this.operaciones=operaciones;
 			MenuAltaBajaModificacion();
+			loDeCiro();
 			MenuClienteEmpleadoProveedor();
 			
 			itemsMenu();
+			
 			añadirTodo();
 			añadirAlMenuBar();
 			this.setJMenuBar(menubar); //LO METEMOS EN LA VENTANA
 			this.setVisible(true);	
 		}
 
+		public void loDeCiro()
+		{
+			//pedirCita, altaVehiculo, mostrarVehiculos, buscarVehiculo,
+			pedirCita=new JMenuItem("Pedir cita");
+			altaVehiculo=new JMenuItem("Alta de vehículo");
+			mostrarVehiculos=new JMenuItem("Mostrar vehículos");
+			buscarVehiculo=new JMenuItem("Buscar vehículo");
+			cita.add(pedirCita);
+			vehiculo.add(altaVehiculo);
+			vehiculo.add(mostrarVehiculos);
+			vehiculo.add(buscarVehiculo);
+			
+		}
 		
 		public void añadirAlMenuBar()
 		{
@@ -60,9 +77,8 @@ public class ventanaMenuPrincipal extends JFrame{
 		
 		public void itemsMenu()
 		{
-			vehiculo=new JMenuItem("Vehículos");
 			servicio=new JMenuItem("Servicios");
-			cita=new JMenuItem("Citas");
+			
 			factura=new JMenuItem("Facturas");
 			nomina=new JMenuItem("Nominas");
 			maquinaria=new JMenuItem("Maquinaria");			
@@ -74,6 +90,8 @@ public class ventanaMenuPrincipal extends JFrame{
 			menu=new JMenu("Menú");
 			alta=new JMenu("Alta");
 			baja=new JMenu("Baja");
+			vehiculo=new JMenu("Vehículos");
+			cita=new JMenu("Citas");
 			modificar=new JMenu("Modificar");
 			salir=new JMenuItem("Salir");
 			salir.addActionListener(new EscuchadorMenu(this, "salir", operaciones));
@@ -100,6 +118,11 @@ public class ventanaMenuPrincipal extends JFrame{
 			modificar_empleado.addActionListener(new EscuchadorMenu(this, "me", operaciones));
 			modificar_proveedor=new JMenuItem("Proveedores");
 			modificar_proveedor.addActionListener(new EscuchadorMenu(this, "mp", operaciones));
+			//pedirCita, altaVehiculo, mostrarVehiculos, buscarVehiculo,
+			pedirCita.addActionListener(new EscuchadorMenu(this, "acita", operaciones));
+			altaVehiculo.addActionListener(new EscuchadorMenu(this, "av", operaciones));
+			mostrarVehiculos.addActionListener(new EscuchadorMenu(this, "mv", operaciones));
+			buscarVehiculo.addActionListener(new EscuchadorMenu(this, "bv", operaciones));
 		}	
 		
 }

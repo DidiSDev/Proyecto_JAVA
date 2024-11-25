@@ -1,7 +1,14 @@
 
 public class claseVehiculo {
-	private int idCliente, año;
+	private int idCliente, año , idVehiculo;
 	private String marca, modelo, matricula;
+
+	public int getIdVehiculo() {
+		return idVehiculo;
+	}
+	public void setIdVehiculo(int idVehiculo) {
+		this.idVehiculo = idVehiculo;
+	}
 	
 	public int getIdCliente() {
 		return idCliente;
