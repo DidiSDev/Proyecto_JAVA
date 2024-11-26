@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-11-2024 a las 11:48:57
+-- Tiempo de generación: 25-11-2024 a las 20:57:08
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -50,9 +50,9 @@ INSERT INTO `admin` (`id_admin`, `nombre_admin`, `pass_admin`) VALUES
 CREATE TABLE `citas` (
   `cita_id` int(11) NOT NULL,
   `cliente_id` int(11) NOT NULL,
-  `empleado_id` int(11) NOT NULL,
-  `fecha_hora` datetime DEFAULT NULL,
-  `servicio_id` int(11) DEFAULT NULL
+  `fecha` datetime DEFAULT NULL,
+  `servicio_id` int(11) DEFAULT NULL,
+  `hora` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -67,7 +67,8 @@ CREATE TABLE `clientes` (
   `apellido` varchar(100) DEFAULT NULL,
   `direccion` varchar(200) DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL
+  `email` varchar(100) DEFAULT NULL,
+  `sexo` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -98,7 +99,8 @@ CREATE TABLE `empleados` (
   `direccion` varchar(200) DEFAULT NULL,
   `telefono` varchar(20) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `puesto` varchar(50) DEFAULT NULL
+  `puesto` varchar(50) DEFAULT NULL,
+  `sexo` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -175,7 +177,7 @@ CREATE TABLE `servicios` (
   `nombre` varchar(100) NOT NULL,
   `descripcion` text DEFAULT NULL,
   `costo` decimal(10,2) DEFAULT NULL,
-  `empleado_id` int(11) DEFAULT NULL
+  `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -190,7 +192,6 @@ CREATE TABLE `vehiculos` (
   `modelo` varchar(50) DEFAULT NULL,
   `año` year(4) DEFAULT NULL,
   `matricula` varchar(20) DEFAULT NULL,
-  `id_empleado` int(11) NOT NULL,
   `id_cliente` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -210,7 +211,6 @@ ALTER TABLE `admin`
 ALTER TABLE `citas`
   ADD PRIMARY KEY (`cita_id`),
   ADD KEY `cliente_id` (`cliente_id`),
-  ADD KEY `empleado_id` (`empleado_id`),
   ADD KEY `servicio_id` (`servicio_id`);
 
 --
@@ -266,8 +266,7 @@ ALTER TABLE `proveedores`
 -- Indices de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  ADD PRIMARY KEY (`servicio_id`),
-  ADD KEY `empleado_id` (`empleado_id`);
+  ADD PRIMARY KEY (`servicio_id`);
 
 --
 -- Indices de la tabla `vehiculos`
@@ -337,7 +336,6 @@ ALTER TABLE `servicios`
 --
 ALTER TABLE `citas`
   ADD CONSTRAINT `citas_ibfk_1` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`cliente_id`),
-  ADD CONSTRAINT `citas_ibfk_2` FOREIGN KEY (`empleado_id`) REFERENCES `empleados` (`empleado_id`),
   ADD CONSTRAINT `citas_ibfk_3` FOREIGN KEY (`servicio_id`) REFERENCES `servicios` (`servicio_id`);
 
 --
@@ -364,12 +362,6 @@ ALTER TABLE `maquinarias`
 --
 ALTER TABLE `nominas`
   ADD CONSTRAINT `nominas_ibfk_1` FOREIGN KEY (`empleado_id`) REFERENCES `empleados` (`empleado_id`);
-
---
--- Filtros para la tabla `servicios`
---
-ALTER TABLE `servicios`
-  ADD CONSTRAINT `servicios_ibfk_1` FOREIGN KEY (`empleado_id`) REFERENCES `empleados` (`empleado_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
