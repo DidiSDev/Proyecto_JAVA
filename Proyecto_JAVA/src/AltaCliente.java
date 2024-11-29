@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 public class AltaCliente extends JInternalFrame{
 
 	private AltaArriba altarriba;
@@ -11,7 +12,7 @@ public class AltaCliente extends JInternalFrame{
 		this.setLayout(new FlowLayout());
 		this.setBackground(Color.LIGHT_GRAY.darker());
 		altarriba = new AltaArriba(v);
-		altarriba.setPreferredSize(new Dimension(550,150));
+		altarriba.setPreferredSize(new Dimension(550,180));
 		this.getContentPane().add(altarriba);
         opc1 = new JCheckBox("HE LEÍDO Y ACEPTO LOS TÉRMINOS Y CONDICIONES");
         opc2 = new JCheckBox("ESTOY DE ACUERDO CON LA POLITICA DE PRIVACIDAD DE LA EMPRESA");
@@ -42,6 +43,9 @@ public class AltaCliente extends JInternalFrame{
 		if(opc1.isSelected()==false || opc2.isSelected()==false) {
 			JOptionPane.showMessageDialog(altarriba, "ACEPTE LOS TERMINOS PORFAVOR");
 		}
+	}
+	public void insertarAlta() throws ClassNotFoundException, SQLException {
+		altarriba.insertar();
 	}
 	
 }

@@ -8,6 +8,8 @@ public class EscuchadorMenu implements ActionListener {
 	private ventanaMenuPrincipal v;
 	private String opc;
 	private BaseDatos operaciones;
+	private ModificacionCliente mc;
+	private BajaClientes bc;
 	
 	EscuchadorMenu(ventanaMenuPrincipal vent, String frase, BaseDatos operaciones){
 		v=vent;
@@ -30,6 +32,10 @@ public class EscuchadorMenu implements ActionListener {
             v.revalidate(); 
             break;
         case "ae":
+        	AltaEmpleado ae=new AltaEmpleado(v, operaciones);
+			v.getContentPane().removeAll();
+			v.getContentPane().add(ae);
+			ae.setVisible(true);
             break;
         case "ap":
         	  v.getContentPane().removeAll();
@@ -42,15 +48,39 @@ public class EscuchadorMenu implements ActionListener {
             break;
         case "mc":
         	v.getContentPane().removeAll(); 
-        	ModificarCliente mc = new ModificarCliente();
-            mc.setVisible(true);
-            v.getContentPane().add(mc);
+        	try {
+				mc = new ModificacionCliente(v);
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        	v.getContentPane().add(mc);
             v.repaint(); 
             v.revalidate(); 
             break;
         case "bc":
+      	  v.getContentPane().removeAll();
+			try {
+				bc = new BajaClientes(v,operaciones);
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        	v.getContentPane().add(bc);
+            v.repaint(); 
+            v.revalidate(); 
         	break;
         case "be":
+        	BajaEmpleado be=new BajaEmpleado(v, operaciones);
+			v.getContentPane().removeAll();
+			v.getContentPane().add(be);
+			be.setVisible(true);
         	break;
         case "bp":
         	v.getContentPane().removeAll();
@@ -62,6 +92,10 @@ public class EscuchadorMenu implements ActionListener {
         	v.revalidate();
         	break;
         case "me":
+        	ModificarEmpleado me=new ModificarEmpleado(v, operaciones);
+			v.getContentPane().removeAll();
+			v.getContentPane().add(me);
+			me.setVisible(true);
         	break;
         case "mp":
         	v.getContentPane().removeAll();

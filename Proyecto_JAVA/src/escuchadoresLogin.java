@@ -38,7 +38,13 @@ public class escuchadoresLogin implements ActionListener
                          if (rs.next()) 
                          {
                              JOptionPane.showMessageDialog(v, "Datos correctos, conectando...");
-                             ventanaMenuPrincipal ventanaMenuPrincipal = new ventanaMenuPrincipal(operaciones);
+                             ventanaMenuPrincipal ventanaMenuPrincipal = null;
+							try {
+								ventanaMenuPrincipal = new ventanaMenuPrincipal(operaciones);
+							} catch (ClassNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
                              ventanaMenuPrincipal.setVisible(true);
                              v.dispose(); //CIERRO ESTA VENTANA
                          } 
